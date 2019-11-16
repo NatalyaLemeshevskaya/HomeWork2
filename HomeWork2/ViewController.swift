@@ -44,50 +44,91 @@ class ViewController: UIViewController{
         blueSlider.minimumTrackTintColor = .blue
         
         changeColor()
-        changeValue(label: redLabel, textField: redTextField, slider: redSlider)
-        changeValue(label: greenLabel, textField: greenTextField, slider: greenSlider)
-        changeValue(label: blueLabel, textField: blueTextField, slider: blueSlider)
+        changeValue(slider: redSlider)
+        changeValue(slider: greenSlider)
+        changeValue(slider: blueSlider)
         
         redTextField.keyboardType = UIKeyboardType.decimalPad
         greenTextField.keyboardType = UIKeyboardType.decimalPad
         blueTextField.keyboardType = UIKeyboardType.decimalPad
         
-        setDoneOnKeyboard(textFieldRed: redTextField, textFieldGreen: greenTextField, textFieldBlue: blueTextField)
+        redTextField.delegate = self
+        greenTextField.delegate = self
+        blueTextField.delegate = self
     
+        
+        setDoneOnKeyboard(textFieldRed: redTextField, textFieldGreen: greenTextField, textFieldBlue: blueTextField)
+            
     }
 
     
-    private func changeValue(label: UILabel, textField: UITextField, slider: UISlider) {
-        label.text = String(format: "%.2f", slider.value)
-        textField.text = String(format: "%.2f", slider.value)
-        
+    private func changeValue(slider: UISlider) {
+        switch slider.tag {
+        case 0:
+            redLabel.text = String(format: "%.2f", slider.value)
+            redTextField.text = String(format: "%.2f", slider.value)
+        case 1:
+            greenLabel.text = String(format: "%.2f", slider.value)
+            greenTextField.text = String(format: "%.2f", slider.value)
+        case 2:
+            blueLabel.text = String(format: "%.2f", slider.value)
+            blueTextField.text = String(format: "%.2f", slider.value)
+        default:
+            return
+        }
     }
     
     private func changeColor()  {
-
         colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: 1.0)
     }
 
     @IBAction func redSliderAction() {
         changeColor()
-        changeValue(label: redLabel, textField: redTextField, slider: redSlider)
+        changeValue(slider: redSlider)
     }
     
     @IBAction func greenSliderAction() {
         changeColor()
-        changeValue(label: greenLabel, textField: greenTextField, slider: greenSlider)
+        changeValue(slider: greenSlider)
     }
     
     @IBAction func blueSliderAction() {
         changeColor()
-        changeValue(label: blueLabel, textField: blueTextField, slider: blueSlider)
+        changeValue(slider: blueSlider)
+    }
+    
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text, !text.isEmpty else {
+            return
+        }
+        
+        if let textForSlider = Float(text){
+            if 0...1 ~= textForSlider{
+        switch textField.tag {
+        case 0:
+            redSlider.value = textForSlider
+            changeValue(slider: redSlider)
+        case 1:
+            greenSlider.value = textForSlider
+            changeValue(slider: greenSlider)
+        case 2:
+            blueSlider.value = textForSlider
+            changeValue(slider: blueSlider)
+        default:
+            return
+                }
+            }else {
+                showErrorAlert()
+            }
+       }
     }
 
 }
 
-extension UIViewController: UITextFieldDelegate {
-    
-    func setDoneOnKeyboard(textFieldRed: UITextField, textFieldGreen: UITextField, textFieldBlue: UITextField) {
+extension ViewController: UITextFieldDelegate {
+        
+    private  func setDoneOnKeyboard(textFieldRed: UITextField, textFieldGreen: UITextField, textFieldBlue: UITextField) {
     let keyboardToolbar = UIToolbar()
     keyboardToolbar.sizeToFit()
     let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -99,12 +140,24 @@ extension UIViewController: UITextFieldDelegate {
     textFieldGreen.inputAccessoryView = keyboardToolbar
     textFieldBlue.inputAccessoryView = keyboardToolbar
 
-}
+   }
+    
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+         dismissKeyboard()
+     }
 
-    @objc func dismissKeyboard() {
-    view.endEditing(true)
- }
-
+     @objc func dismissKeyboard() {
+       view.endEditing(true)
+    }
+    
+    private func showErrorAlert(){
+        let alert = UIAlertController(title: "Wrong number", message: "The value should be between 0 and 1", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+        
+    }
+    
 }
 
 
