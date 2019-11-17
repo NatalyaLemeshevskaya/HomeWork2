@@ -109,17 +109,21 @@ class ViewController: UIViewController{
         case 0:
             redSlider.value = textForSlider
             changeValue(slider: redSlider)
+            changeColor()
         case 1:
             greenSlider.value = textForSlider
             changeValue(slider: greenSlider)
+            changeColor()
         case 2:
             blueSlider.value = textForSlider
             changeValue(slider: blueSlider)
+            changeColor()
         default:
             return
                 }
             }else {
                 showErrorAlert()
+                
             }
        }
     }
