@@ -61,6 +61,9 @@ class SettingViewController: UIViewController, ColorProtocol{
         blueTextField.delegate = self
             
         setDoneOnKeyboard(textFieldRed: redTextField, textFieldGreen: greenTextField, textFieldBlue: blueTextField)
+        
+        changeStiderValueWithColor()
+        
     }
 
     
@@ -105,6 +108,10 @@ class SettingViewController: UIViewController, ColorProtocol{
         redSlider.value = Float(fRed)
         greenSlider.value = Float(fGreen)
         blueSlider.value = Float(fBlue)
+        
+        changeValue(slider: redSlider)
+        changeValue(slider: greenSlider)
+        changeValue(slider: blueSlider)
 
     }
     
