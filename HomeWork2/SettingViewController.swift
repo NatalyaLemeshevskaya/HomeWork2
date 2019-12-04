@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SettingViewController.swift
 //  HomeWork2
 //
 //  Created by Наташа Лемешевская on 11/15/19.
@@ -8,7 +8,17 @@
 
 import UIKit
 
-class ViewController: UIViewController{
+protocol ColorProtocol {
+    var color: UIColor { get }
+}
+
+protocol SettingViewControllerDelegate {
+    func changeColor(_ color: UIColor)
+}
+
+class SettingViewController: UIViewController{
+    
+   // var color: UIColor
 
     @IBOutlet var redLabel: UILabel!
     @IBOutlet var greenLabel: UILabel!
@@ -23,25 +33,12 @@ class ViewController: UIViewController{
     @IBOutlet var blueTextField: UITextField!
     
     @IBOutlet var colorView: UIView!
-    
 
-    let minValueSlider:Float = 0.0
-    let maxValueSlider:Float = 1.0
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        redSlider.minimumValue = minValueSlider
-        redSlider.maximumValue = maxValueSlider
         redSlider.minimumTrackTintColor = .red
-        
-        greenSlider.minimumValue = minValueSlider
-        greenSlider.maximumValue = maxValueSlider
         greenSlider.minimumTrackTintColor = .green
-        
-        blueSlider.minimumValue = minValueSlider
-        blueSlider.maximumValue = maxValueSlider
-        blueSlider.minimumTrackTintColor = .blue
         
         changeColor()
         changeValue(slider: redSlider)
@@ -79,25 +76,63 @@ class ViewController: UIViewController{
     }
     
     private func changeColor()  {
-        colorView.backgroundColor = UIColor(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: 1.0)
+        colorView.backgroundColor = UIColor(
+            red: CGFloat(redSlider.value),
+            green: CGFloat(greenSlider.value),
+            blue: CGFloat(blueSlider.value),
+            alpha: 1.0
+        )
     }
+    
+    
+    @IBAction func sliderAction(_ sender: UISlider) {
+        changeColor()
+        switch sender.tag {
+        case 1: changeValue(slider: redSlider)
+        case 2: changeValue(slider: greenSlider)
+        case 3: changeValue(slider: blueSlider)
+        default:
+            return
+        }
+    }
+    
+}
 
-    @IBAction func redSliderAction() {
-        changeColor()
-        changeValue(slider: redSlider)
+extension SettingViewController {
+        
+    private  func setDoneOnKeyboard(textFieldRed: UITextField, textFieldGreen: UITextField, textFieldBlue: UITextField) {
+        let keyboardToolbar = UIToolbar()
+        keyboardToolbar.sizeToFit()
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: self,
+                                            action: #selector(dismissKeyboard))
+        keyboardToolbar.items = [flexBarButton, doneBarButton]
+        
+        textFieldRed.inputAccessoryView = keyboardToolbar
+        textFieldGreen.inputAccessoryView = keyboardToolbar
+        textFieldBlue.inputAccessoryView = keyboardToolbar
+        
     }
     
-    @IBAction func greenSliderAction() {
-        changeColor()
-        changeValue(slider: greenSlider)
-    }
-    
-    @IBAction func blueSliderAction() {
-        changeColor()
-        changeValue(slider: blueSlider)
-    }
-    
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+         dismissKeyboard()
+     }
 
+     @objc func dismissKeyboard() {
+       view.endEditing(true)
+    }
+    
+    private func showErrorAlert(){
+        let alert = UIAlertController(title: "Wrong number", message: "The value should be between 0 and 1", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+        
+    }
+    
+}
+
+extension SettingViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let text = textField.text, !text.isEmpty else {
             return
@@ -127,41 +162,6 @@ class ViewController: UIViewController{
             }
        }
     }
-
-}
-
-extension ViewController: UITextFieldDelegate {
-        
-    private  func setDoneOnKeyboard(textFieldRed: UITextField, textFieldGreen: UITextField, textFieldBlue: UITextField) {
-    let keyboardToolbar = UIToolbar()
-    keyboardToolbar.sizeToFit()
-    let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-    let doneBarButton = UIBarButtonItem(barButtonSystemItem: .done, target: self,
-                                        action: #selector(dismissKeyboard))
-    keyboardToolbar.items = [flexBarButton, doneBarButton]
-        
-    textFieldRed.inputAccessoryView = keyboardToolbar
-    textFieldGreen.inputAccessoryView = keyboardToolbar
-    textFieldBlue.inputAccessoryView = keyboardToolbar
-
-   }
-    
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-         dismissKeyboard()
-     }
-
-     @objc func dismissKeyboard() {
-       view.endEditing(true)
-    }
-    
-    private func showErrorAlert(){
-        let alert = UIAlertController(title: "Wrong number", message: "The value should be between 0 and 1", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .cancel)
-        alert.addAction(okAction)
-        present(alert, animated: true)
-        
-    }
-    
 }
 
 

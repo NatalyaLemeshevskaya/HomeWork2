@@ -7,19 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		603BAB34239784CC005F21C5 /* ColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603BAB33239784CC005F21C5 /* ColorViewController.swift */; };
 		60A36A62237EA5D500A6DD3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A36A61237EA5D500A6DD3D /* AppDelegate.swift */; };
 		60A36A64237EA5D500A6DD3D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A36A63237EA5D500A6DD3D /* SceneDelegate.swift */; };
-		60A36A66237EA5D500A6DD3D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A36A65237EA5D500A6DD3D /* ViewController.swift */; };
+		60A36A66237EA5D500A6DD3D /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A36A65237EA5D500A6DD3D /* SettingViewController.swift */; };
 		60A36A69237EA5D500A6DD3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60A36A67237EA5D500A6DD3D /* Main.storyboard */; };
 		60A36A6B237EA5DA00A6DD3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60A36A6A237EA5DA00A6DD3D /* Assets.xcassets */; };
 		60A36A6E237EA5DA00A6DD3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60A36A6C237EA5DA00A6DD3D /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		603BAB33239784CC005F21C5 /* ColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorViewController.swift; sourceTree = "<group>"; };
 		60A36A5E237EA5D500A6DD3D /* HomeWork2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeWork2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60A36A61237EA5D500A6DD3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60A36A63237EA5D500A6DD3D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		60A36A65237EA5D500A6DD3D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		60A36A65237EA5D500A6DD3D /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		60A36A68237EA5D500A6DD3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		60A36A6A237EA5DA00A6DD3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		60A36A6D237EA5DA00A6DD3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,11 +60,12 @@
 			children = (
 				60A36A61237EA5D500A6DD3D /* AppDelegate.swift */,
 				60A36A63237EA5D500A6DD3D /* SceneDelegate.swift */,
-				60A36A65237EA5D500A6DD3D /* ViewController.swift */,
+				60A36A65237EA5D500A6DD3D /* SettingViewController.swift */,
 				60A36A67237EA5D500A6DD3D /* Main.storyboard */,
 				60A36A6A237EA5DA00A6DD3D /* Assets.xcassets */,
 				60A36A6C237EA5DA00A6DD3D /* LaunchScreen.storyboard */,
 				60A36A6F237EA5DA00A6DD3D /* Info.plist */,
+				603BAB33239784CC005F21C5 /* ColorViewController.swift */,
 			);
 			path = HomeWork2;
 			sourceTree = "<group>";
@@ -138,8 +141,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60A36A66237EA5D500A6DD3D /* ViewController.swift in Sources */,
+				60A36A66237EA5D500A6DD3D /* SettingViewController.swift in Sources */,
 				60A36A62237EA5D500A6DD3D /* AppDelegate.swift in Sources */,
+				603BAB34239784CC005F21C5 /* ColorViewController.swift in Sources */,
 				60A36A64237EA5D500A6DD3D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,7 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9YQU4FC7R;
 				INFOPLIST_FILE = HomeWork2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -306,7 +310,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9YQU4FC7R;
 				INFOPLIST_FILE = HomeWork2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
