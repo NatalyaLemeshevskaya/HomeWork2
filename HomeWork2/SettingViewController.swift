@@ -16,10 +16,17 @@ protocol SettingViewControllerDelegate {
     func changeColor(_ color: UIColor)
 }
 
-class SettingViewController: UIViewController{
+class SettingViewController: UIViewController, ColorProtocol{
     
-   // var color: UIColor
-
+    
+    var color: UIColor {
+        setBackColor()
+    }
+    
+    var delegate: SettingViewControllerDelegate!
+    
+    var newViewColor: UIColor!
+    
     @IBOutlet var redLabel: UILabel!
     @IBOutlet var greenLabel: UILabel!
     @IBOutlet var blueLabel: UILabel!
@@ -52,10 +59,8 @@ class SettingViewController: UIViewController{
         redTextField.delegate = self
         greenTextField.delegate = self
         blueTextField.delegate = self
-    
-        
-        setDoneOnKeyboard(textFieldRed: redTextField, textFieldGreen: greenTextField, textFieldBlue: blueTextField)
             
+        setDoneOnKeyboard(textFieldRed: redTextField, textFieldGreen: greenTextField, textFieldBlue: blueTextField)
     }
 
     
@@ -76,7 +81,11 @@ class SettingViewController: UIViewController{
     }
     
     private func changeColor()  {
-        colorView.backgroundColor = UIColor(
+        colorView.backgroundColor = setBackColor()
+    }
+    
+    private func setBackColor() -> UIColor{
+        return UIColor(
             red: CGFloat(redSlider.value),
             green: CGFloat(greenSlider.value),
             blue: CGFloat(blueSlider.value),
@@ -84,13 +93,38 @@ class SettingViewController: UIViewController{
         )
     }
     
+    private func changeStiderValueWithColor() {
+        var fRed : CGFloat = 0
+        var fGreen : CGFloat = 0
+        var fBlue : CGFloat = 0
+        var fAlpha: CGFloat = 0
+        
+        colorView.backgroundColor = newViewColor
+        colorView.backgroundColor?.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha)
+        
+        redSlider.value = Float(fRed)
+        greenSlider.value = Float(fGreen)
+        blueSlider.value = Float(fBlue)
+
+    }
+    
+    
+    @IBAction func saveActoin(_ sender: Any) {
+        delegate.changeColor(color)
+        dismiss(animated: true)
+    }
     
     @IBAction func sliderAction(_ sender: UISlider) {
-        changeColor()
         switch sender.tag {
-        case 1: changeValue(slider: redSlider)
-        case 2: changeValue(slider: greenSlider)
-        case 3: changeValue(slider: blueSlider)
+        case 0:
+            changeValue(slider: redSlider)
+            changeColor()
+        case 1:
+            changeValue(slider: greenSlider)
+            changeColor()
+        case 2:
+            changeValue(slider: blueSlider)
+            changeColor()
         default:
             return
         }
@@ -112,9 +146,9 @@ extension SettingViewController {
         textFieldGreen.inputAccessoryView = keyboardToolbar
         textFieldBlue.inputAccessoryView = keyboardToolbar
         
-    }
+     }
     
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
          dismissKeyboard()
      }
 
