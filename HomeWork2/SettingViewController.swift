@@ -155,7 +155,7 @@ extension SettingViewController {
         
      }
     
-     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+     open override func touchesBegan (_ touches: Set<UITouch>, with event: UIEvent?) {
          dismissKeyboard()
      }
 
@@ -163,7 +163,7 @@ extension SettingViewController {
        view.endEditing(true)
     }
     
-    private func showErrorAlert(){
+    private func showErrorAlert() {
         let alert = UIAlertController(title: "Wrong number", message: "The value should be between 0 and 1", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel)
         alert.addAction(okAction)
@@ -179,7 +179,7 @@ extension SettingViewController: UITextFieldDelegate {
             return
         }
         
-        if let textForSlider = Float(text){
+        if let textForSlider = Float(text) {
             if 0...1 ~= textForSlider{
         switch textField.tag {
         case 0:
@@ -196,8 +196,8 @@ extension SettingViewController: UITextFieldDelegate {
             changeColor()
         default:
             return
-                }
-            }else {
+        }
+            } else {
                 showErrorAlert()
                 
             }
