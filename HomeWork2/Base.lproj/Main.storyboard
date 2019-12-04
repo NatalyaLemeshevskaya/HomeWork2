@@ -18,7 +18,7 @@
                         <viewLayoutGuide key="safeArea" id="21f-Yn-SiF"/>
                     </view>
                     <navigationItem key="navigationItem" id="0DL-M0-iZR">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="70M-eN-hyO">
+                        <barButtonItem key="rightBarButtonItem" image="square.and.pencil" catalog="system" id="70M-eN-hyO">
                             <connections>
                                 <action selector="editAction:" destination="q02-vW-eUv" id="x0X-0r-dNs"/>
                                 <segue destination="BYZ-38-t0r" kind="showDetail" id="hCn-7j-T3I"/>
@@ -215,4 +215,7 @@
             <point key="canvasLocation" x="-340" y="114"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="square.and.pencil" catalog="system" width="64" height="58"/>
+    </resources>
 </document>
